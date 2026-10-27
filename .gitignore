@@ -1,0 +1,23 @@
+# Секреты: настоящие .env не храним, только .env.example
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Данные: корпоративные выгрузки и дампы в репозиторий не попадают
+datasets/
+*.dump
+*.backup
+*.sql.gz
+*.zip
+
+# Obsidian: личные настройки, темы, плагины, конфликты синхронизации
+.obsidian/
+*.sync-conflict-*
+
+# Мусор системы и редакторов
+.DS_Store
+Thumbs.db
+*~
+.trash/
