@@ -1,0 +1,70 @@
+# Merge over docker-compose-non-dev.yml from Apache Superset tag 3.1.1.
+# Compose >= 2.24.4 is required for !override.
+name: superset
+
+x-avalon-image: &avalon-image apache/superset:3.1.1
+x-avalon-env: &avalon-env
+  DATABASE_PASSWORD: ${SUPERSET_DB_PASSWORD:?Set SUPERSET_DB_PASSWORD in local .env}
+  EXAMPLES_PASSWORD: ${SUPERSET_EXAMPLES_PASSWORD:?Set SUPERSET_EXAMPLES_PASSWORD in local .env}
+  SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY:?Set SUPERSET_SECRET_KEY in local .env}
+  SUPERSET_LOAD_EXAMPLES: "no"
+
+x-avalon-runtime-dependencies: &avalon-runtime-dependencies
+  db:
+    condition: service_healthy
+  redis:
+    condition: service_healthy
+  superset-init:
+    condition: service_completed_successfully
+
+services:
+  db:
+    environment:
+      POSTGRES_PASSWORD: ${SUPERSET_DB_PASSWORD:?Set SUPERSET_DB_PASSWORD in local .env}
+      EXAMPLES_PASSWORD: ${SUPERSET_EXAMPLES_PASSWORD:?Set SUPERSET_EXAMPLES_PASSWORD in local .env}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  redis:
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  superset:
+    image: *avalon-image
+    environment: *avalon-env
+    ports: !override
+      - "127.0.0.1:8088:8088"
+    networks: [default, bi-net]
+    depends_on: *avalon-runtime-dependencies
+
+  superset-init:
+    image: *avalon-image
+    environment: *avalon-env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  superset-worker:
+    image: *avalon-image
+    environment: *avalon-env
+    networks: [default, bi-net]
+    depends_on: *avalon-runtime-dependencies
+
+  superset-worker-beat:
+    image: *avalon-image
+    environment: *avalon-env
+    networks: [default, bi-net]
+    depends_on: *avalon-runtime-dependencies
+
+networks:
+  bi-net:
+    external: true

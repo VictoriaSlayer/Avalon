@@ -1,6 +1,13 @@
 # О чем файл
 В данном файле собрана контекстная информация о проекте.
 
+## Документация
+
+- [Правила](AGENTS.md), [структура](docs/structure.md), [план](docs/plan.md).
+- [Актуальный статус](docs/status.md), [решения](docs/decisions.md).
+- [Рабочий стенд](technical/work-stand.md), [конфигурации](infrastructure/README.md).
+- [Диагностика доступа к Superset](project-stages/01-make-stand/incident-01-superset-access.md).
+
 ## Личный опыт
 Я fullstack системный/бизнес аналитик уровня middle/middle+.
 Имеются навыки с точки бизнес анализа по выявлению/фиксации требований, выстраиванию процессов.
