@@ -1,7 +1,7 @@
 # Структура проекта Avalon
 
 > Статус: актуален
-> Обновлено: 2026-10-30 18:56 MSK
+> Обновлено: 2026-11-03 16:49 MSK
 > Ответственный: Codex
 
 ## Фактическая структура
@@ -23,6 +23,7 @@ Avalon/
 │       ├── task-01-make-stand.md
 │       ├── result-01-stand-config.md
 │       ├── task-02-make-stand.md
+│       ├── task-03-reboot-and-restore.md
 │       ├── incident-01-superset-access.md
 │       └── knowledge-01-linux-comands.md
 ├── technical/
