@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Необходимость заключить договор">
+      <bpmn:outgoing>Flow_1ti4jfj</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_1oqbfsg" name="Согласование&#10;заявки на подготовку договора">
+      <bpmn:incoming>Flow_1ti4jfj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0m2whwh</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1ti4jfj" sourceRef="StartEvent_1" targetRef="Activity_1oqbfsg" />
+    <bpmn:sequenceFlow id="Flow_0m2whwh" sourceRef="Activity_1oqbfsg" targetRef="Activity_1cdacob" />
+    <bpmn:task id="Activity_0p2uv4f" name="Подписание договора">
+      <bpmn:incoming>Flow_1lmn975</bpmn:incoming>
+      <bpmn:outgoing>Flow_02jppp8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_0y9equo" name="Инициатор может работать по договору">
+      <bpmn:incoming>Flow_02jppp8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_02jppp8" sourceRef="Activity_0p2uv4f" targetRef="Event_0y9equo" />
+    <bpmn:task id="Activity_1cdacob" name="Подготовка проекта и согласование договора">
+      <bpmn:incoming>Flow_0m2whwh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lmn975</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1lmn975" sourceRef="Activity_1cdacob" targetRef="Activity_0p2uv4f" />
+    <bpmn:textAnnotation id="TextAnnotation_1m4n3ok">
+      <bpmn:text>Инициатор заявки</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0kkf1mg" associationDirection="None" sourceRef="Activity_1oqbfsg" targetRef="TextAnnotation_1m4n3ok" />
+    <bpmn:textAnnotation id="TextAnnotation_05ysvke">
+      <bpmn:text>Договорной отдел</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0nvdxlh" associationDirection="None" sourceRef="Activity_1cdacob" targetRef="TextAnnotation_05ysvke" />
+    <bpmn:textAnnotation id="TextAnnotation_1cl1jzt">
+      <bpmn:text>Инициатор заявки;
+Договорной отдел;</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0j0wzds" associationDirection="None" sourceRef="Activity_0p2uv4f" targetRef="TextAnnotation_1cl1jzt" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="473" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="451" y="145" width="81" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1oqbfsg_di" bpmnElement="Activity_1oqbfsg">
+        <dc:Bounds x="660" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p2uv4f_di" bpmnElement="Activity_0p2uv4f">
+        <dc:Bounds x="1140" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0y9equo_di" bpmnElement="Event_0y9equo">
+        <dc:Bounds x="1402" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1380" y="145" width="82" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cdacob_di" bpmnElement="Activity_1cdacob">
+        <dc:Bounds x="910" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1m4n3ok_di" bpmnElement="TextAnnotation_1m4n3ok">
+        <dc:Bounds x="660" y="220" width="100" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_05ysvke_di" bpmnElement="TextAnnotation_05ysvke">
+        <dc:Bounds x="910" y="220" width="100" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1cl1jzt_di" bpmnElement="TextAnnotation_1cl1jzt">
+        <dc:Bounds x="1140" y="225" width="157.81365826538178" height="48.183839881393624" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ti4jfj_di" bpmnElement="Flow_1ti4jfj">
+        <di:waypoint x="509" y="120" />
+        <di:waypoint x="660" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0m2whwh_di" bpmnElement="Flow_0m2whwh">
+        <di:waypoint x="760" y="120" />
+        <di:waypoint x="910" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02jppp8_di" bpmnElement="Flow_02jppp8">
+        <di:waypoint x="1240" y="120" />
+        <di:waypoint x="1402" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lmn975_di" bpmnElement="Flow_1lmn975">
+        <di:waypoint x="1010" y="120" />
+        <di:waypoint x="1140" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0kkf1mg_di" bpmnElement="Association_0kkf1mg">
+        <di:waypoint x="710" y="160" />
+        <di:waypoint x="710" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0nvdxlh_di" bpmnElement="Association_0nvdxlh">
+        <di:waypoint x="960" y="160" />
+        <di:waypoint x="960" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0j0wzds_di" bpmnElement="Association_0j0wzds">
+        <di:waypoint x="1190" y="160" />
+        <di:waypoint x="1190" y="225" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

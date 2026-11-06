@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Создали заявку на подготовку договора">
+      <bpmn:outgoing>Flow_12p5yzf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_041y60z" name="Собрали все документы необходимые для согласования">
+      <bpmn:incoming>Flow_12p5yzf</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mjc9zk</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_12p5yzf" sourceRef="StartEvent_1" targetRef="Activity_041y60z" />
+    <bpmn:intermediateThrowEvent id="Event_1q776wl" name="Отправили Заявку на согласование в 1С ДО">
+      <bpmn:incoming>Flow_1mjc9zk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bkgfdj</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1mjc9zk" sourceRef="Activity_041y60z" targetRef="Event_1q776wl" />
+    <bpmn:exclusiveGateway id="Gateway_1jsghx5" name="Заявку согласовали?">
+      <bpmn:incoming>Flow_100ey5p</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yutfhs</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ju11sp</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1yutfhs" name="Да" sourceRef="Gateway_1jsghx5" targetRef="Event_0mpoivv" />
+    <bpmn:sequenceFlow id="Flow_1ju11sp" name="Нет" sourceRef="Gateway_1jsghx5" targetRef="Event_0tpgkri" />
+    <bpmn:task id="Activity_012g73r" name="Согласование заявки">
+      <bpmn:incoming>Flow_1bkgfdj</bpmn:incoming>
+      <bpmn:outgoing>Flow_100ey5p</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1bkgfdj" sourceRef="Event_1q776wl" targetRef="Activity_012g73r" />
+    <bpmn:sequenceFlow id="Flow_100ey5p" sourceRef="Activity_012g73r" targetRef="Gateway_1jsghx5" />
+    <bpmn:endEvent id="Event_0tpgkri" name="Уведомление инициатора">
+      <bpmn:incoming>Flow_1ju11sp</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_0mpoivv" name="Договорной отдел берёт заявку в исполнение">
+      <bpmn:incoming>Flow_1yutfhs</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:textAnnotation id="TextAnnotation_1oqihax">
+      <bpmn:text>Инициатор заявки:
+- собирает все необходимые документы для согласования;
+- создает и отправляет заявку на согласование в 1С ДО;</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1wso6ve" associationDirection="None" sourceRef="Activity_041y60z" targetRef="TextAnnotation_1oqihax" />
+    <bpmn:textAnnotation id="TextAnnotation_0isqeje">
+      <bpmn:text>РП,
+Контрольно-аналитический отдел,
+Экономический отдел,
+Договорной отдел,
+Доп. согласующие</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1tm1gu3" associationDirection="None" sourceRef="Activity_012g73r" targetRef="TextAnnotation_0isqeje" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="222" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="200" y="145" width="81" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_041y60z_di" bpmnElement="Activity_041y60z">
+        <dc:Bounds x="390" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1q776wl_di" bpmnElement="Event_1q776wl">
+        <dc:Bounds x="622" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="600" y="145" width="80" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1jsghx5_di" bpmnElement="Gateway_1jsghx5" isMarkerVisible="true">
+        <dc:Bounds x="975" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="965" y="56" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_012g73r_di" bpmnElement="Activity_012g73r">
+        <dc:Bounds x="790" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0tpgkri_di" bpmnElement="Event_0tpgkri">
+        <dc:Bounds x="1152" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1136" y="295" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ifvxyu_di" bpmnElement="Event_0mpoivv">
+        <dc:Bounds x="1152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1140" y="145" width="63" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1oqihax_di" bpmnElement="TextAnnotation_1oqihax">
+        <dc:Bounds x="260" y="-82" width="360" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0isqeje_di" bpmnElement="TextAnnotation_0isqeje">
+        <dc:Bounds x="790" y="-90" width="256" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_12p5yzf_di" bpmnElement="Flow_12p5yzf">
+        <di:waypoint x="258" y="120" />
+        <di:waypoint x="390" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mjc9zk_di" bpmnElement="Flow_1mjc9zk">
+        <di:waypoint x="490" y="120" />
+        <di:waypoint x="622" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yutfhs_di" bpmnElement="Flow_1yutfhs">
+        <di:waypoint x="1025" y="120" />
+        <di:waypoint x="1152" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1082" y="102" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ju11sp_di" bpmnElement="Flow_1ju11sp">
+        <di:waypoint x="1000" y="145" />
+        <di:waypoint x="1000" y="270" />
+        <di:waypoint x="1152" y="270" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1006" y="189" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bkgfdj_di" bpmnElement="Flow_1bkgfdj">
+        <di:waypoint x="658" y="120" />
+        <di:waypoint x="790" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_100ey5p_di" bpmnElement="Flow_100ey5p">
+        <di:waypoint x="890" y="120" />
+        <di:waypoint x="975" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1wso6ve_di" bpmnElement="Association_1wso6ve">
+        <di:waypoint x="440" y="80" />
+        <di:waypoint x="440" y="-22" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1tm1gu3_di" bpmnElement="Association_1tm1gu3">
+        <di:waypoint x="840" y="80" />
+        <di:waypoint x="840" y="-6" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
