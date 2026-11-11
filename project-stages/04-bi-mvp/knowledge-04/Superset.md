@@ -50,3 +50,7 @@ Chart - вариант визуализации на основе Dataset. От�
 SQL Lab - dataset - chart - dashboard.
 
 ---
+
+Не используем дашборды имеющие статус:
+- deprecated (устарело);
+- legacy;
